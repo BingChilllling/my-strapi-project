@@ -1,0 +1,43 @@
+{
+  "kind": "collectionType",
+  "collectionName": "sponsorship_tiers",
+  "info": {
+    "singularName": "sponsorship-tier",
+    "pluralName": "sponsorship-tiers",
+    "displayName": "Sponsorship Tier",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "tierRank": {
+      "type": "string"
+    },
+    "tierDescription": {
+      "type": "blocks"
+    },
+    "advertisingBenefits": {
+      "type": "blocks"
+    },
+    "MinimumDonationAmount": {
+      "type": "integer"
+    },
+    "sponsors": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::sponsor.sponsor",
+      "mappedBy": "sponsorship_tier"
+    },
+    "businesses": {
+      "type": "relation",
+      "relation": "manyToMany",
+      "target": "api::business.business",
+      "mappedBy": "sponsorship_tiers"
+    },
+    "DisplayOrder": {
+      "type": "integer"
+    }
+  }
+}

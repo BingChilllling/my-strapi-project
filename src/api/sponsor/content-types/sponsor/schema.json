@@ -4,7 +4,8 @@
   "info": {
     "singularName": "sponsor",
     "pluralName": "sponsors",
-    "displayName": "Sponsor"
+    "displayName": "Sponsor",
+    "description": ""
   },
   "options": {
     "draftAndPublish": true
@@ -19,6 +20,29 @@
       "relation": "manyToMany",
       "target": "api::sports-team.sports-team",
       "mappedBy": "sponsors"
+    },
+    "sponsorship_tier": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::sponsorship-tier.sponsorship-tier",
+      "inversedBy": "sponsors"
+    },
+    "sponsorLogo": {
+      "type": "media",
+      "multiple": false,
+      "required": false,
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos",
+        "audios"
+      ]
+    },
+    "AdvertisingContent": {
+      "type": "blocks"
+    },
+    "ContactInformation": {
+      "type": "string"
     }
   }
 }

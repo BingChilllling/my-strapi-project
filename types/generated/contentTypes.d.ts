@@ -369,75 +369,154 @@ export interface AdminUser extends Struct.CollectionTypeSchema {
   };
 }
 
-export interface ApiHomePageHomePage extends Struct.SingleTypeSchema {
-  collectionName: 'home_pages';
+export interface ApiAdminHomePageAdminHomePage extends Struct.SingleTypeSchema {
+  collectionName: 'admin_home_pages';
   info: {
     description: '';
-    displayName: 'SportsTeamHomePage';
-    pluralName: 'home-pages';
-    singularName: 'home-page';
+    displayName: 'AdminHomePage';
+    pluralName: 'admin-home-pages';
+    singularName: 'admin-home-page';
   };
   options: {
     draftAndPublish: true;
   };
   attributes: {
-    AmountSponsored: Schema.Attribute.Integer;
+    businesses: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::business.business'
+    >;
     createdAt: Schema.Attribute.DateTime;
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
-    HowSponsored: Schema.Attribute.Blocks;
+    highSchool: Schema.Attribute.String;
+    individuals: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::individual.individual'
+    >;
     locale: Schema.Attribute.String & Schema.Attribute.Private;
     localizations: Schema.Attribute.Relation<
       'oneToMany',
-      'api::home-page.home-page'
+      'api::admin-home-page.admin-home-page'
     > &
       Schema.Attribute.Private;
-    numberOfSponsors: Schema.Attribute.Integer;
+    partners: Schema.Attribute.Relation<'oneToMany', 'api::partner.partner'>;
     publishedAt: Schema.Attribute.DateTime;
     sponsors: Schema.Attribute.Relation<'oneToMany', 'api::sponsor.sponsor'>;
+    sportsTeam: Schema.Attribute.String;
+    teamLogo: Schema.Attribute.Media<'images' | 'files' | 'videos' | 'audios'>;
     TotalSponsored: Schema.Attribute.Integer;
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
-    WhenSponsored: Schema.Attribute.DateTime;
+    username: Schema.Attribute.String;
   };
 }
 
-export interface ApiSponsorHomePageSponsorHomePage
-  extends Struct.SingleTypeSchema {
-  collectionName: 'sponsor_home_pages';
+export interface ApiBusinessBusiness extends Struct.CollectionTypeSchema {
+  collectionName: 'businesses';
   info: {
-    displayName: 'SponsorHomePage';
-    pluralName: 'sponsor-home-pages';
-    singularName: 'sponsor-home-page';
+    displayName: 'business';
+    pluralName: 'businesses';
+    singularName: 'business';
   };
   options: {
     draftAndPublish: true;
   };
   attributes: {
+    businessLogo: Schema.Attribute.Media<
+      'images' | 'files' | 'videos' | 'audios',
+      true
+    >;
+    businessName: Schema.Attribute.String;
     createdAt: Schema.Attribute.DateTime;
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
-    HowMuchSponsored: Schema.Attribute.Integer;
-    HowSponsored: Schema.Attribute.Blocks;
     locale: Schema.Attribute.String & Schema.Attribute.Private;
     localizations: Schema.Attribute.Relation<
       'oneToMany',
-      'api::sponsor-home-page.sponsor-home-page'
+      'api::business.business'
     > &
       Schema.Attribute.Private;
     publishedAt: Schema.Attribute.DateTime;
-    TotalSponsored: Schema.Attribute.Integer;
+    sponsorship_tiers: Schema.Attribute.Relation<
+      'manyToMany',
+      'api::sponsorship-tier.sponsorship-tier'
+    >;
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
-    WhenSponsored: Schema.Attribute.DateTime;
+  };
+}
+
+export interface ApiIndividualIndividual extends Struct.CollectionTypeSchema {
+  collectionName: 'individuals';
+  info: {
+    displayName: 'Individual';
+    pluralName: 'individuals';
+    singularName: 'individual';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    amountDonated: Schema.Attribute.Integer;
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    individualName: Schema.Attribute.String;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::individual.individual'
+    > &
+      Schema.Attribute.Private;
+    publishedAt: Schema.Attribute.DateTime;
+    totalDonated: Schema.Attribute.Integer;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+  };
+}
+
+export interface ApiPartnerPartner extends Struct.CollectionTypeSchema {
+  collectionName: 'partners';
+  info: {
+    displayName: 'Partner';
+    pluralName: 'partners';
+    singularName: 'partner';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    amountFundraised: Schema.Attribute.Integer;
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    fundraiserDate: Schema.Attribute.Date;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::partner.partner'
+    > &
+      Schema.Attribute.Private;
+    partnerLogo: Schema.Attribute.Media<
+      'images' | 'files' | 'videos' | 'audios'
+    >;
+    partnerName: Schema.Attribute.String;
+    percentSales: Schema.Attribute.Integer;
+    publishedAt: Schema.Attribute.DateTime;
+    totalFundraised: Schema.Attribute.Integer;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
   };
 }
 
 export interface ApiSponsorSponsor extends Struct.CollectionTypeSchema {
   collectionName: 'sponsors';
   info: {
+    description: '';
     displayName: 'Sponsor';
     pluralName: 'sponsors';
     singularName: 'sponsor';
@@ -446,6 +525,8 @@ export interface ApiSponsorSponsor extends Struct.CollectionTypeSchema {
     draftAndPublish: true;
   };
   attributes: {
+    AdvertisingContent: Schema.Attribute.Blocks;
+    ContactInformation: Schema.Attribute.String;
     createdAt: Schema.Attribute.DateTime;
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
@@ -456,11 +537,57 @@ export interface ApiSponsorSponsor extends Struct.CollectionTypeSchema {
     > &
       Schema.Attribute.Private;
     publishedAt: Schema.Attribute.DateTime;
+    sponsorLogo: Schema.Attribute.Media<
+      'images' | 'files' | 'videos' | 'audios'
+    >;
     sponsorName: Schema.Attribute.String;
+    sponsorship_tier: Schema.Attribute.Relation<
+      'manyToOne',
+      'api::sponsorship-tier.sponsorship-tier'
+    >;
     sports_teams: Schema.Attribute.Relation<
       'manyToMany',
       'api::sports-team.sports-team'
     >;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+  };
+}
+
+export interface ApiSponsorshipTierSponsorshipTier
+  extends Struct.CollectionTypeSchema {
+  collectionName: 'sponsorship_tiers';
+  info: {
+    description: '';
+    displayName: 'Sponsorship Tier';
+    pluralName: 'sponsorship-tiers';
+    singularName: 'sponsorship-tier';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    advertisingBenefits: Schema.Attribute.Blocks;
+    businesses: Schema.Attribute.Relation<
+      'manyToMany',
+      'api::business.business'
+    >;
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    DisplayOrder: Schema.Attribute.Integer;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::sponsorship-tier.sponsorship-tier'
+    > &
+      Schema.Attribute.Private;
+    MinimumDonationAmount: Schema.Attribute.Integer;
+    publishedAt: Schema.Attribute.DateTime;
+    sponsors: Schema.Attribute.Relation<'oneToMany', 'api::sponsor.sponsor'>;
+    tierDescription: Schema.Attribute.Blocks;
+    tierRank: Schema.Attribute.String;
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
@@ -493,11 +620,43 @@ export interface ApiSportsTeamSportsTeam extends Struct.CollectionTypeSchema {
     sponsors: Schema.Attribute.Relation<'manyToMany', 'api::sponsor.sponsor'>;
     teamContactEmail: Schema.Attribute.Email;
     teamDescription: Schema.Attribute.Blocks;
-    teamLogo: Schema.Attribute.Media<
-      'images' | 'files' | 'videos' | 'audios',
-      true
-    >;
+    teamLogo: Schema.Attribute.Media<'images' | 'files' | 'videos' | 'audios'>;
     teamName: Schema.Attribute.String;
+    TotalDonations: Schema.Attribute.Integer;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+  };
+}
+
+export interface ApiSubscriptionPlanSubscriptionPlan
+  extends Struct.CollectionTypeSchema {
+  collectionName: 'subscription_plans';
+  info: {
+    displayName: 'subscriptionPlan';
+    pluralName: 'subscription-plans';
+    singularName: 'subscription-plan';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    CustomAmount: Schema.Attribute.Integer;
+    DonationAmount: Schema.Attribute.Integer;
+    Frequency: Schema.Attribute.Enumeration<
+      ['Weekly', 'Monthly', 'Quarterly', 'Yearly']
+    >;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::subscription-plan.subscription-plan'
+    > &
+      Schema.Attribute.Private;
+    planName: Schema.Attribute.String;
+    publishedAt: Schema.Attribute.DateTime;
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
@@ -1013,10 +1172,14 @@ declare module '@strapi/strapi' {
       'admin::transfer-token': AdminTransferToken;
       'admin::transfer-token-permission': AdminTransferTokenPermission;
       'admin::user': AdminUser;
-      'api::home-page.home-page': ApiHomePageHomePage;
-      'api::sponsor-home-page.sponsor-home-page': ApiSponsorHomePageSponsorHomePage;
+      'api::admin-home-page.admin-home-page': ApiAdminHomePageAdminHomePage;
+      'api::business.business': ApiBusinessBusiness;
+      'api::individual.individual': ApiIndividualIndividual;
+      'api::partner.partner': ApiPartnerPartner;
       'api::sponsor.sponsor': ApiSponsorSponsor;
+      'api::sponsorship-tier.sponsorship-tier': ApiSponsorshipTierSponsorshipTier;
       'api::sports-team.sports-team': ApiSportsTeamSportsTeam;
+      'api::subscription-plan.subscription-plan': ApiSubscriptionPlanSubscriptionPlan;
       'plugin::content-releases.release': PluginContentReleasesRelease;
       'plugin::content-releases.release-action': PluginContentReleasesReleaseAction;
       'plugin::i18n.locale': PluginI18NLocale;

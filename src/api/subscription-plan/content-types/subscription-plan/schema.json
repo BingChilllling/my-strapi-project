@@ -1,0 +1,33 @@
+{
+  "kind": "collectionType",
+  "collectionName": "subscription_plans",
+  "info": {
+    "singularName": "subscription-plan",
+    "pluralName": "subscription-plans",
+    "displayName": "subscriptionPlan"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "planName": {
+      "type": "string"
+    },
+    "DonationAmount": {
+      "type": "integer"
+    },
+    "Frequency": {
+      "type": "enumeration",
+      "enum": [
+        "Weekly",
+        "Monthly",
+        "Quarterly",
+        "Yearly"
+      ]
+    },
+    "CustomAmount": {
+      "type": "integer"
+    }
+  }
+}

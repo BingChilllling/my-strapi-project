@@ -1,0 +1,59 @@
+{
+  "kind": "singleType",
+  "collectionName": "admin_home_pages",
+  "info": {
+    "singularName": "admin-home-page",
+    "pluralName": "admin-home-pages",
+    "displayName": "AdminHomePage",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "username": {
+      "type": "string"
+    },
+    "highSchool": {
+      "type": "string"
+    },
+    "sportsTeam": {
+      "type": "string"
+    },
+    "teamLogo": {
+      "type": "media",
+      "multiple": false,
+      "required": false,
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos",
+        "audios"
+      ]
+    },
+    "TotalSponsored": {
+      "type": "integer"
+    },
+    "businesses": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::business.business"
+    },
+    "individuals": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::individual.individual"
+    },
+    "partners": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::partner.partner"
+    },
+    "sponsors": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::sponsor.sponsor"
+    }
+  }
+}

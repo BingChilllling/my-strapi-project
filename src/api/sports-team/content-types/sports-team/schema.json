@@ -20,7 +20,7 @@
     },
     "teamLogo": {
       "type": "media",
-      "multiple": true,
+      "multiple": false,
       "required": false,
       "allowedTypes": [
         "images",
@@ -40,6 +40,9 @@
     },
     "teamContactEmail": {
       "type": "email"
+    },
+    "TotalDonations": {
+      "type": "integer"
     }
   }
 }
