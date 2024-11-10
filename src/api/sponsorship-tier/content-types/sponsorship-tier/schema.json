@@ -4,7 +4,7 @@
   "info": {
     "singularName": "sponsorship-tier",
     "pluralName": "sponsorship-tiers",
-    "displayName": "Sponsorship Tier",
+    "displayName": "Sponsorship Tier small",
     "description": ""
   },
   "options": {
@@ -14,12 +14,6 @@
   "attributes": {
     "tierRank": {
       "type": "string"
-    },
-    "tierDescription": {
-      "type": "blocks"
-    },
-    "advertisingBenefits": {
-      "type": "blocks"
     },
     "MinimumDonationAmount": {
       "type": "integer"
@@ -38,6 +32,12 @@
     },
     "DisplayOrder": {
       "type": "integer"
+    },
+    "tierName": {
+      "type": "text"
+    },
+    "advertisingBenefits": {
+      "type": "text"
     }
   }
 }

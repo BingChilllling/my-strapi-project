@@ -1,0 +1,22 @@
+{
+  "kind": "collectionType",
+  "collectionName": "sponsorship_tier_bigs",
+  "info": {
+    "singularName": "sponsorship-tier-big",
+    "pluralName": "sponsorship-tier-bigs",
+    "displayName": "Sponsorship Tier Big",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "tierDescription": {
+      "type": "text"
+    },
+    "MinimumDonationAmount": {
+      "type": "integer"
+    }
+  }
+}

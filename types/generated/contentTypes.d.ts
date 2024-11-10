@@ -555,12 +555,43 @@ export interface ApiSponsorSponsor extends Struct.CollectionTypeSchema {
   };
 }
 
+export interface ApiSponsorshipTierBigSponsorshipTierBig
+  extends Struct.CollectionTypeSchema {
+  collectionName: 'sponsorship_tier_bigs';
+  info: {
+    description: '';
+    displayName: 'Sponsorship Tier Big';
+    pluralName: 'sponsorship-tier-bigs';
+    singularName: 'sponsorship-tier-big';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::sponsorship-tier-big.sponsorship-tier-big'
+    > &
+      Schema.Attribute.Private;
+    MinimumDonationAmount: Schema.Attribute.Integer;
+    publishedAt: Schema.Attribute.DateTime;
+    tierDescription: Schema.Attribute.Text;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+  };
+}
+
 export interface ApiSponsorshipTierSponsorshipTier
   extends Struct.CollectionTypeSchema {
   collectionName: 'sponsorship_tiers';
   info: {
     description: '';
-    displayName: 'Sponsorship Tier';
+    displayName: 'Sponsorship Tier small';
     pluralName: 'sponsorship-tiers';
     singularName: 'sponsorship-tier';
   };
@@ -568,7 +599,7 @@ export interface ApiSponsorshipTierSponsorshipTier
     draftAndPublish: true;
   };
   attributes: {
-    advertisingBenefits: Schema.Attribute.Blocks;
+    advertisingBenefits: Schema.Attribute.Text;
     businesses: Schema.Attribute.Relation<
       'manyToMany',
       'api::business.business'
@@ -586,7 +617,7 @@ export interface ApiSponsorshipTierSponsorshipTier
     MinimumDonationAmount: Schema.Attribute.Integer;
     publishedAt: Schema.Attribute.DateTime;
     sponsors: Schema.Attribute.Relation<'oneToMany', 'api::sponsor.sponsor'>;
-    tierDescription: Schema.Attribute.Blocks;
+    tierName: Schema.Attribute.Text;
     tierRank: Schema.Attribute.String;
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
@@ -1177,6 +1208,7 @@ declare module '@strapi/strapi' {
       'api::individual.individual': ApiIndividualIndividual;
       'api::partner.partner': ApiPartnerPartner;
       'api::sponsor.sponsor': ApiSponsorSponsor;
+      'api::sponsorship-tier-big.sponsorship-tier-big': ApiSponsorshipTierBigSponsorshipTierBig;
       'api::sponsorship-tier.sponsorship-tier': ApiSponsorshipTierSponsorshipTier;
       'api::sports-team.sports-team': ApiSportsTeamSportsTeam;
       'api::subscription-plan.subscription-plan': ApiSubscriptionPlanSubscriptionPlan;

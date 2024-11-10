@@ -4,6 +4,8 @@
   "private": true,
   "description": "A Strapi application",
   "scripts": {
+    "generate:types": "strapi-to-typescript && npm run copy:types",
+    "copy:types": "cp -r ./types/generated ../fundraising/src/types",
     "build": "strapi build",
     "deploy": "strapi deploy",
     "develop": "strapi develop",
@@ -24,6 +26,7 @@
     "@types/node": "^20",
     "@types/react": "^18",
     "@types/react-dom": "^18",
+    "strapi-to-typescript": "^2.0.15",
     "typescript": "^5"
   },
   "engines": {
