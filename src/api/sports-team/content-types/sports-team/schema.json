@@ -1,0 +1,45 @@
+{
+  "kind": "collectionType",
+  "collectionName": "sports_teams",
+  "info": {
+    "singularName": "sports-team",
+    "pluralName": "sports-teams",
+    "displayName": "Sports Team",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "teamName": {
+      "type": "string"
+    },
+    "teamDescription": {
+      "type": "blocks"
+    },
+    "teamLogo": {
+      "type": "media",
+      "multiple": true,
+      "required": false,
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos",
+        "audios"
+      ]
+    },
+    "numberOfSponsors": {
+      "type": "integer"
+    },
+    "sponsors": {
+      "type": "relation",
+      "relation": "manyToMany",
+      "target": "api::sponsor.sponsor",
+      "inversedBy": "sports_teams"
+    },
+    "teamContactEmail": {
+      "type": "email"
+    }
+  }
+}

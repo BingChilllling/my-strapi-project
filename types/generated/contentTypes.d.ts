@@ -369,6 +369,75 @@ export interface AdminUser extends Struct.CollectionTypeSchema {
   };
 }
 
+export interface ApiSponsorSponsor extends Struct.CollectionTypeSchema {
+  collectionName: 'sponsors';
+  info: {
+    displayName: 'Sponsor';
+    pluralName: 'sponsors';
+    singularName: 'sponsor';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::sponsor.sponsor'
+    > &
+      Schema.Attribute.Private;
+    publishedAt: Schema.Attribute.DateTime;
+    sponsorName: Schema.Attribute.String;
+    sports_teams: Schema.Attribute.Relation<
+      'manyToMany',
+      'api::sports-team.sports-team'
+    >;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+  };
+}
+
+export interface ApiSportsTeamSportsTeam extends Struct.CollectionTypeSchema {
+  collectionName: 'sports_teams';
+  info: {
+    description: '';
+    displayName: 'Sports Team';
+    pluralName: 'sports-teams';
+    singularName: 'sports-team';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::sports-team.sports-team'
+    > &
+      Schema.Attribute.Private;
+    numberOfSponsors: Schema.Attribute.Integer;
+    publishedAt: Schema.Attribute.DateTime;
+    sponsors: Schema.Attribute.Relation<'manyToMany', 'api::sponsor.sponsor'>;
+    teamContactEmail: Schema.Attribute.Email;
+    teamDescription: Schema.Attribute.Blocks;
+    teamLogo: Schema.Attribute.Media<
+      'images' | 'files' | 'videos' | 'audios',
+      true
+    >;
+    teamName: Schema.Attribute.String;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+  };
+}
+
 export interface PluginContentReleasesRelease
   extends Struct.CollectionTypeSchema {
   collectionName: 'strapi_releases';
@@ -878,6 +947,8 @@ declare module '@strapi/strapi' {
       'admin::transfer-token': AdminTransferToken;
       'admin::transfer-token-permission': AdminTransferTokenPermission;
       'admin::user': AdminUser;
+      'api::sponsor.sponsor': ApiSponsorSponsor;
+      'api::sports-team.sports-team': ApiSportsTeamSportsTeam;
       'plugin::content-releases.release': PluginContentReleasesRelease;
       'plugin::content-releases.release-action': PluginContentReleasesReleaseAction;
       'plugin::i18n.locale': PluginI18NLocale;
