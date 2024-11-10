@@ -403,6 +403,38 @@ export interface ApiHomePageHomePage extends Struct.SingleTypeSchema {
   };
 }
 
+export interface ApiSponsorHomePageSponsorHomePage
+  extends Struct.SingleTypeSchema {
+  collectionName: 'sponsor_home_pages';
+  info: {
+    displayName: 'SponsorHomePage';
+    pluralName: 'sponsor-home-pages';
+    singularName: 'sponsor-home-page';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    HowMuchSponsored: Schema.Attribute.Integer;
+    HowSponsored: Schema.Attribute.Blocks;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::sponsor-home-page.sponsor-home-page'
+    > &
+      Schema.Attribute.Private;
+    publishedAt: Schema.Attribute.DateTime;
+    TotalSponsored: Schema.Attribute.Integer;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    WhenSponsored: Schema.Attribute.DateTime;
+  };
+}
+
 export interface ApiSponsorSponsor extends Struct.CollectionTypeSchema {
   collectionName: 'sponsors';
   info: {
@@ -982,6 +1014,7 @@ declare module '@strapi/strapi' {
       'admin::transfer-token-permission': AdminTransferTokenPermission;
       'admin::user': AdminUser;
       'api::home-page.home-page': ApiHomePageHomePage;
+      'api::sponsor-home-page.sponsor-home-page': ApiSponsorHomePageSponsorHomePage;
       'api::sponsor.sponsor': ApiSponsorSponsor;
       'api::sports-team.sports-team': ApiSportsTeamSportsTeam;
       'plugin::content-releases.release': PluginContentReleasesRelease;
